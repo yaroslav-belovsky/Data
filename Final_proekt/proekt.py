@@ -9,28 +9,20 @@ print(df1["driverRef"])
 
 
 
-id = df1[df1["driverRef"] == "leclerc"][["driverId"]].iloc[0]
-print('id ', id["driverId"])
+driverId = list(df1[df1["driverRef"] == "leclerc"]["driverId"])[0]
 
-info1 = df2[df2["driverId"] == id["driverId"]][["points", "raceId"]]
-print("info1", info1)
+driver_info = df2[df2["driverId"] == driverId][["points", "raceId"]]
 
-info2 = info1[info1["points"] != "\\N"][["points", "raceId"]]
-print("info2",info2)
-print('???', list(info1["raceId"]))
-points = info2["points"]
-print('fastestLapTime', points)
+empty_driver_info = driver_info[driver_info["points"] != "\\N"][["points", "raceId"]]
 
-dates = df3[df3["raceId"].isin(list(info2["raceId"]))]["date"]
-print('dates', dates)
+points = empty_driver_info["points"]
 
-
-
+dates = df3[df3["raceId"].isin(list(empty_driver_info["raceId"]))]["date"]
 
 plt.figure(figsize=(10,6))
 plt.plot(list(dates), list(points))#, marker="*", color="r"
-plt.xticks(list(dates), list(dates), rotation='vertical')
-plt.title("зміна балів в Леклера на протязі років")
+plt.xticks(list(dates), rotation='vertical')
+plt.title("зміна балів в Леклера")
 plt.xlabel("дати")#, frontsize=12
 plt.ylabel("бали")#, frontsize=12
 
