@@ -1,0 +1,54 @@
+Ось поширені marker у Matplotlib:
+
+Кола: o
+
+Квадрат: s
+
+Трикутники: ^, v, <, >
+
+Ромб: D, малий ромб: d
+
+Зірка: *
+
+Пʼятикутник: p, заповнений плюс: P
+
+Шестикутники: h, H
+
+Хрест: x, плюс: +
+
+Точкові: . (точка), , (піксель)
+
+Тривимірні “вусики”: 1, 2, 3, 4
+
+Вертикальна риска: |, горизонтальна: _
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("movies_dataset.csv")
+
+df = df.dropna(subset=['budget', 'countries_origin'])
+
+avg_budget = df.groupby('countries_origin')['budget'].mean()
+
+top_10 = avg_budget[:10]
+
+plt.figure(figsize=(10, 6))
+plt.bar
+(top_10.index, top_10.values, color='gray')
+
+plt.xlabel("Країна")
+plt.ylabel("Середній бюджет")
+plt.title("10 країн за середнім бюджетом фільмів")
+plt.show
+()
